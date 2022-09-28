@@ -1,8 +1,8 @@
 APP_COMMAND = python manage.py
 FIX_LOC=seeds/
 TEST_SETTINGS = 'app.settings.local'
-PYTEST_CMD = py.test domain app api -v -x -n auto
-PYTEST_STDOUT_CMD = py.test domain app api -s -v -x
+PYTEST_CMD = py.test tests -v -x -n auto
+PYTEST_STDOUT_CMD = py.test tests -s -v -x
 
 clean:
 	@rm -rf docs/build/
