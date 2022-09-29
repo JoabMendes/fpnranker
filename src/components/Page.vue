@@ -3,7 +3,7 @@
       <b-container>
           <b-row>
               <b-col cols="12">
-                  <h2>Other page</h2>
+                  <h2>Other page as</h2>
               </b-col>
           </b-row>
       </b-container>

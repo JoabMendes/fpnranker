@@ -4,16 +4,18 @@ var BundleTracker = require('webpack-bundle-tracker');
 var Dotenv = require('dotenv-webpack');
 const { VueLoaderPlugin } = require('vue-loader');
 var WriteFilePlugin  = require('write-file-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
+    context: __dirname,
     entry: './src/main.js',
     output: {
-        path: path.resolve(__dirname, './static'),
+        path: path.resolve('./static/'),
         publicPath: '/static/',
         filename: 'build.js'
     },
     plugins: [
-        new BundleTracker({filename: 'webpack-stats.json'}),
+        new BundleTracker({filename: './webpack-stats.json'}),
         new WriteFilePlugin(),
         new Dotenv({
             systemvars: true
@@ -92,7 +94,8 @@ module.exports = {
         hot: true,
         client: {
             overlay: true,
-        }
+        },
+        liveReload: true
     },
     performance: {
         hints: false
@@ -116,13 +119,14 @@ if (process.env.NODE_ENV === 'production') {
     module.exports.optimization = {
         minimize: true,
         minimizer: [
-            new TerserPlugin({
-                sourceMap: true,
-                extractComments: true,
-                terserOptions: {
-                    warnings: false
-                }
-            })
+            (compiler) => {
+                new TerserPlugin({
+                    extractComments: true,
+                    terserOptions: {
+                        warnings: false
+                    },
+                }).apply(compiler);
+            }
         ],
-    };
+    }
 }

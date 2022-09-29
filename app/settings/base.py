@@ -125,17 +125,16 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media").replace('\\', '/')
 
 STATICFILES_DIRS = (
-  os.path.join(BASE_DIR, "static/"),
+  os.path.join(BASE_DIR, "static"),
 )
 
 WEBPACK_LOADER = {
     'DEFAULT': {
+        'BUNDLE_DIR_NAME': '/',
         'CACHE': not DEBUG,
-        'BUNDLE_DIR_NAME': '',
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
         'POLL_INTERVAL': 0.1,
-        'TIMEOUT': None,
-        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
     }
 }
 

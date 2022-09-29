@@ -1,10 +1,16 @@
-# from django.conf.urls import url
+from django.urls import path
 
-# from api.views import review_view
+from api.views import competition_round_view
 
 urlpatterns = [
-    # url(
-    #     r'^reviews/member/(?P<member_id>[0-9]+)?/?$',
-    #     review_view.MemberReviewAPIView.as_view()
-    # )
+    path(
+        "competition/<competition_id>",
+        competition_round_view.CompetitionAPIView.as_view(),
+        name="competition",
+    ),
+    path(
+        "competition/<competition_id>/rank",
+        competition_round_view.CompetitionRankAPIView.as_view(),
+        name="competition-rank",
+    ),
 ]

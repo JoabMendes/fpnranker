@@ -4,6 +4,7 @@ var BundleTracker = require('webpack-bundle-tracker');
 var Dotenv = require('dotenv-webpack');
 const { VueLoaderPlugin } = require('vue-loader');
 var WriteFilePlugin  = require('write-file-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     entry: './src/main.js',
@@ -111,13 +112,14 @@ module.exports = {
     optimization: {
         minimize: true,
         minimizer: [
-            new TerserPlugin({
-                sourceMap: false,
-                extractComments: true,
-                terserOptions: {
-                    warnings: false
-                }
-            })
+            (compiler) => {
+                new TerserPlugin({
+                    extractComments: true,
+                    terserOptions: {
+                        warnings: false
+                    },
+                }).apply(compiler);
+            }
         ],
     }
 }

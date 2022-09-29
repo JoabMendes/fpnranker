@@ -68,9 +68,6 @@ test:
 	$(PYTEST_CMD)
 
 test-matching:
-	$(PYTEST_CMD) -rs -k $(Q)
-
-test-matching-stdout:
 	$(PYTEST_STDOUT_CMD) -rs -k $(Q)
 
 migrations:

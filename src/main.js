@@ -10,9 +10,9 @@ Vue.use(Router);
 Vue.use(BootstrapVue);
 
 // Views
-const App = {template: './App.vue'};
-const Index = {template: './components/Index.vue'};
-const Page = {template: './components/Page.vue'};
+import App from './App.vue'
+import Index from './components/Index.vue';
+import Page from './components/Page.vue';
 
 const router = new Router({
   routes: [
