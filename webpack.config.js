@@ -7,10 +7,9 @@ var WriteFilePlugin  = require('write-file-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-    context: __dirname,
     entry: './src/main.js',
     output: {
-        path: path.resolve('./static/'),
+        path: path.resolve(__dirname, './static'),
         publicPath: '/static/',
         filename: 'build.js'
     },
@@ -95,7 +94,10 @@ module.exports = {
         client: {
             overlay: true,
         },
-        liveReload: true
+        liveReload: true,
+        devMiddleware: {
+            writeToDisk: true
+        }
     },
     performance: {
         hints: false
