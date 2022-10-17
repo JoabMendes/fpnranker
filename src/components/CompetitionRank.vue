@@ -21,16 +21,21 @@
                         <div class="score subtitle">Peso</div>
                         <div class="score">Coef</div>
                     </div>
-                    <div class="streamer" v-for="(competitor, i) in rankingData" :key="competitor.id" :ref="(el) => {rankingEl[competitor.id] = el}">
-                        <div class="ranking-no">{{i + 1}}</div>
+                    <div class="streamer"
+                         v-for="(competitor, i) in rankingData"
+                         :key="competitor.id"
+                         :ref="(el) => {rankingEl[competitor.id] = el}">
+                        <div class="ranking-no">{{ i + 1 }}</div>
                         <div class="picture">
                             <img :src="competitor.picture"/>
                         </div>
                         <div class="display-name">
                             {{ competitor.name }}
                         </div>
-                        <div class="score subtitle">{{competitor.last_valid_round.lifted_weight}} Kg</div>
-                        <div class="score">{{competitor.showScore}}</div>
+                        <div class="score subtitle">
+                            {{ competitor.last_valid_round.lifted_weight }} Kg
+                        </div>
+                        <div class="score">{{ competitor.showScore }}</div>
                     </div>
                 </b-col>
             </b-row>
@@ -42,9 +47,9 @@
 
 import axios from 'axios';
 
-import { bubbleSort, swapElement } from "../helper.js";
+import {bubbleSort, swapElement} from "../helper.js";
 
-const refreshTime = 100000;
+const refreshTime = 300;
 
 export default {
     name: 'CompetitionRank',
@@ -56,14 +61,16 @@ export default {
             rankDataEndpoint: "/api/v1/competition/{id}/rank",
             competition: {},
             rankingEl: [],
-            rankingData: []
+            rankingData: [],
+            polling: null
         }
     },
     beforeMount() {
         this.fetchCompetition();
+        this.fetchRank();
     },
     mounted() {
-        this.fetchRank();
+        setInterval(() => {this.fetchRank()}, 5000);
     },
     methods: {
         goCompetitions() {
@@ -100,11 +107,10 @@ export default {
                         }
                     });
                 });
-                setInterval(this.fetchRank(), 10000);
             }.bind(this)).catch(function (error) {
                 console.log(error)
             }.bind(this));
-        }
+        },
     }
 }
 </script>
