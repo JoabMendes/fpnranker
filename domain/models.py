@@ -33,7 +33,8 @@ class Competition(models.Model):
 
 
 class Competitor(models.Model):
-    competitor_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    id = models.BigAutoField(primary_key=True, editable=False)
+    competitor_id = models.UUIDField(default=uuid.uuid4)
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
     name = models.CharField(
         max_length=256, blank=False, null=False,
@@ -69,7 +70,8 @@ class Competitor(models.Model):
 
 
 class CompetitionRound(models.Model):
-    round_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    id = models.BigAutoField(primary_key=True, editable=False)
+    round_id = models.UUIDField(default=uuid.uuid4)
     competitor = models.ForeignKey(Competitor, on_delete=models.CASCADE)
     lifted_weight = models.FloatField(
         null=False, blank=False, default=0.0,
@@ -78,7 +80,7 @@ class CompetitionRound(models.Model):
     coefficient = models.DecimalField(
         blank=True,
         null=True,
-        max_digits=5,
+        max_digits=15,
         decimal_places=3,
         verbose_name="Coeficiente"
     )

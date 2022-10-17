@@ -49,8 +49,7 @@ class TestCompetitionAPIGETView:
     ):
         # given
         endpoint = reverse(
-            "competition",
-            kwargs={"competition_id": competition.competition_id},
+            "competition"
         )
 
         # when
@@ -206,6 +205,7 @@ class TestCompetitionRankAPIView:
         json_response = response.json()
         assert len(json_response) == 2
         expected_response = {
+            'id': competitors[0].id,
             'competitor_id': str(competitors[0].competitor_id),
             'competition': str(competition.competition_id),
             'name': str(competitors[0].name),
