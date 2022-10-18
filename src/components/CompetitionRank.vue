@@ -18,7 +18,7 @@
                         <div class="ranking-no"></div>
                         <div class="picture"></div>
                         <div class="display-name"></div>
-                        <div class="score subtitle">Peso</div>
+                        <div class="score subtitle"></div>
                         <div class="score">Coef</div>
                     </div>
                     <div class="streamer"
@@ -87,6 +87,7 @@ export default {
             axios.get(this.rankDataEndpoint.replace('{id}', this.id)).then(function (response) {
                 this.rankingData = response.data;
                 response.data.forEach((data) => {
+                    data.last_valid_round.coefficient = parseFloat(data.last_valid_round.coefficient);
                     data.showScore = data.last_valid_round.coefficient;
                 });
                 let prevPosition = [];
@@ -101,9 +102,9 @@ export default {
                         let newTop = this.rankingEl[streamers.id].getBoundingClientRect().top;
                         let prevTop = prevPosition[streamers.id];
                         let diffY = prevTop - newTop;
-                        if (diffY) {
+                        if (diffY && this.rankingEl[streamers.id]) {
                             // swap position after sorted
-                            swapElement(this.this.rankingEl[streamers.userID], diffY, refreshTime);
+                            swapElement(this.rankingEl[streamers.id], diffY, refreshTime);
                         }
                     });
                 });
@@ -136,12 +137,12 @@ $grey: #6c757d;
 .streamer {
     margin: 0 auto;
     width: 900px;
-    height: 40px;
+    height: 60px;
     transition: all 1s ease 0s;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    font-size: 20px;
+    font-size: 25px;
     border: 1px solid #cecece;
     border-radius: 3px;
     margin-top: 5px;
@@ -152,14 +153,14 @@ $grey: #6c757d;
     }
 
     .picture {
-        width: 40px;
+        width: 55px;
         text-align: center;
     }
 
     .picture img {
         margin-right: 2em;
-        height: 30px;
-        width: 30px;
+        height: 40px;
+        width: 40px;
         border-radius: 50%;
     }
 
@@ -177,12 +178,12 @@ $grey: #6c757d;
 .streamer-header {
     margin: 0 auto;
     width: 900px;
-    height: 40px;
+    height: 60px;
     transition: all 0.3s ease 0s;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    font-size: 20px;
+    font-size: 25px;
 
     .ranking-no {
         width: 100px;
