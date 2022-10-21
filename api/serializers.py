@@ -24,6 +24,7 @@ class RankCompetitorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Competitor
         fields = (
+            'id',
             'competitor_id',
             'competition',
             'name',

@@ -7,9 +7,9 @@ class TestCoefficientCalculator:
 
     def test_male_coefficient(self):
         coefficient = CoefficientCalculator.calculate(
-            sex="male", body_weight=84.0, lifted_weight=120.0
+            sex="male", body_weight=84.0, lifted_weight=150.0
         )
-        assert coefficient == Decimal("95.543")
+        assert coefficient == Decimal("119.428")
 
     def test_female_coefficient(self):
         coefficient = CoefficientCalculator.calculate(

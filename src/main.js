@@ -12,25 +12,39 @@ Vue.use(BootstrapVue);
 // Views
 import App from './App.vue'
 import Index from './components/Index.vue';
-import Page from './components/Page.vue';
+import Competition from './components/Competition.vue';
+import CompetitionRank from './components/CompetitionRank.vue';
+import NotFound from './components/NotFound.vue';
 
 const router = new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'index',
-      component: Index,
-    },
-    {
-      path: '/page',
-      name: 'page',
-      component: Page,
-    },
-  ]
+    routes: [
+        {
+            path: '/',
+            name: 'index',
+            component: Index,
+        },
+        {
+            path: "/competition/:id",
+            name: "competition",
+            component: Competition,
+            props: true
+        },
+        {
+            path: "/competition/rank/:id",
+            name: "competition-rank",
+            component: CompetitionRank,
+            props: true
+        },
+        {
+            path: "*",
+            name: "not-found",
+            component: NotFound
+        },
+    ]
 });
 
 new Vue({
-  el: '#app',
-  render: h => h(App),
-  router
+    el: '#app',
+    render: h => h(App),
+    router
 });
