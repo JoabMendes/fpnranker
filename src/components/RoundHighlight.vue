@@ -3,7 +3,7 @@
         <b-container>
             <b-row>
                 <b-col cols="12">
-                    <div class="spacing-medium"></div>
+                    <div class="spacing-big"></div>
                 </b-col>
             </b-row>
             <b-row>
@@ -48,7 +48,7 @@ export default {
         this.loadHighlight()
     },
     mounted() {
-        setInterval(() => {this.loadHighlight()}, 10000);
+        setInterval(() => {this.loadHighlight()}, 5000);
     },
     methods: {
         loadHighlight() {
@@ -83,13 +83,14 @@ $grey: #6c757d;
     //width: 500px;
     //margin: auto;
     .highlight-picture {
-        width: 300px;
+        width: 400px;
     }
     h1 {
-        font-size: 100px;
+        font-size: 150px;
         font-weight: bold;
     }
     h2 {
+        font-size: 60px;
         color: $grey;
     }
 }
