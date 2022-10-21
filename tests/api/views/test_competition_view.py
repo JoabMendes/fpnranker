@@ -224,3 +224,43 @@ class TestCompetitionRankAPIView:
             }
         }
         assert json_response[0] == expected_response
+
+
+@pytest.mark.django_db
+class TestHighlightCompetitionRoundAPIView:
+
+    def test_should_get_empty_when_there_is_no_highlight(
+        self, api_client
+    ):
+        # given
+        endpoint = reverse(
+            "round-highlight",
+        )
+
+        # when
+        response = api_client.get(endpoint)
+
+        # then
+        assert response.status_code == status.HTTP_200_OK
+        assert response.json() == {'h_round_id': None, 'lifted_weight': None}
+
+    def test_should_get_round_when_there_is_a_highlight(
+        self, api_client
+    ):
+        # given
+        baker.make(
+            "domain.HighlightCompetitionRound"
+        )
+        endpoint = reverse(
+            "round-highlight",
+        )
+
+        # when
+        response = api_client.get(endpoint)
+
+        # then
+        assert response.status_code == status.HTTP_200_OK
+        assert 'lifted_weight' in response.json()
+        assert 'name' in response.json().get('competitor')
+        assert 'weight' in response.json().get('competitor')
+        assert 'picture' in response.json().get('competitor')

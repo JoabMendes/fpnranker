@@ -94,3 +94,21 @@ class CompetitionRound(models.Model):
     class Meta:
         verbose_name = "Round"
         verbose_name_plural = "Rounds"
+
+
+class HighlightCompetitionRound(models.Model):
+    h_round_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    competitor = models.ForeignKey(Competitor, on_delete=models.CASCADE)
+    lifted_weight = models.FloatField(
+        null=False, blank=False, default=0.0,
+        verbose_name="Peso Levantado (Kg)"
+    )
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True)
+
+    def __str__(self):
+        return f"{self.competitor.name} - {self.lifted_weight}"
+
+    class Meta:
+        verbose_name = "Destaque de Round"
+        verbose_name_plural = "Destaques de Rounds"

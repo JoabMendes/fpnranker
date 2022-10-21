@@ -7,8 +7,11 @@
                 </b-col>
             </b-row>
             <b-row>
-                <b-col cols="12">
+                <b-col cols="6">
                     <h4>Competições:</h4>
+                </b-col>
+                <b-col cols="6" class="home-btn">
+                    <b-button variant="outline-dark" @click="goHighlight()">Ver destaque de round</b-button>
                 </b-col>
             </b-row>
             <b-row>
@@ -57,6 +60,12 @@ export default {
         },
         goToCompetition(competitionId) {
             this.$router.push({name: 'competition', params: {id: competitionId}});
+        },
+        goHighlight() {
+            let routeData = this.$router.resolve(
+                {name: 'round-highlight'}
+            );
+            window.open(routeData.href, '_blank');
         }
     }
 }
@@ -79,6 +88,10 @@ export default {
         padding-top: 15px;
         padding-bottom: 10px;
     }
+}
+
+.home-btn {
+    text-align: right;
 }
 
 </style>

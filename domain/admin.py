@@ -5,7 +5,8 @@ from django.contrib import admin
 from domain.models import (
     Competition,
     Competitor,
-    CompetitionRound
+    CompetitionRound,
+    HighlightCompetitionRound
 )
 
 
@@ -35,4 +36,14 @@ class CompetitionRoundAdmin(admin.ModelAdmin):
         "competitor", "lifted_weight", "coefficient", "valid"
     ]
     readonly_fields = ("round_id", "coefficient")
+    autocomplete_fields = ("competitor",)
+
+
+@admin.register(HighlightCompetitionRound)
+class HighlightCompetitionRound(admin.ModelAdmin):
+    search_fields = ("competitor__name",)
+    list_display = [
+        "competitor", "lifted_weight", "created_at"
+    ]
+    readonly_fields = ("h_round_id",)
     autocomplete_fields = ("competitor",)

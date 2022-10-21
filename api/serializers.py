@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 
-from domain.models import CompetitionRound, Competitor, Competition
+from domain.models import CompetitionRound, Competitor, Competition, HighlightCompetitionRound
 
 
 class RankCompetitionRoundSerializer(serializers.ModelSerializer):
@@ -63,3 +63,11 @@ class CompetitionSerializer(serializers.ModelSerializer):
             'sex',
             'rounds'
         )
+
+
+class HighlightCompetitionRoundSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = HighlightCompetitionRound
+        fields = "__all__"
+        depth = 1

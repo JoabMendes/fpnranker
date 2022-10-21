@@ -18,4 +18,9 @@ urlpatterns = [
         competition_view.CompetitionRankAPIView.as_view(),
         name="competition-rank",
     ),
+    path(
+        "round-highlight",
+        competition_view.HighlightCompetitionRoundAPIView.as_view(),
+        name="round-highlight",
+    ),
 ]

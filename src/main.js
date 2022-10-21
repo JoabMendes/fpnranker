@@ -15,6 +15,7 @@ import Index from './components/Index.vue';
 import Competition from './components/Competition.vue';
 import CompetitionRank from './components/CompetitionRank.vue';
 import NotFound from './components/NotFound.vue';
+import RoundHighlight from './components/RoundHighlight.vue';
 
 const router = new Router({
     routes: [
@@ -34,6 +35,11 @@ const router = new Router({
             name: "competition-rank",
             component: CompetitionRank,
             props: true
+        },
+        {
+            path: "/round-highlight/",
+            name: "round-highlight",
+            component: RoundHighlight,
         },
         {
             path: "*",

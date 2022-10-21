@@ -7,10 +7,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 
-from domain.models import Competition, Competitor
+from domain.models import Competition, Competitor, HighlightCompetitionRound
 from api.serializers import (
     RankCompetitorSerializer,
-    CompetitionSerializer
+    CompetitionSerializer,
+    HighlightCompetitionRoundSerializer
 )
 
 
@@ -72,4 +73,15 @@ class CompetitionRankAPIView(APIView):
         competition = self._get_competition(competition_id=competition_id)
         competitors = Competitor.objects.filter(competition=competition)
         serialized = RankCompetitorSerializer(competitors, many=True)
+        return Response(serialized.data)
+
+
+@method_decorator(csrf_exempt, name="dispatch")
+class HighlightCompetitionRoundAPIView(APIView):
+
+    permission_classes = ()
+
+    def get(self, request, format=None):
+        highlighted_round = HighlightCompetitionRound.objects.last()
+        serialized = HighlightCompetitionRoundSerializer(highlighted_round)
         return Response(serialized.data)
