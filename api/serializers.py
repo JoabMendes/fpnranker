@@ -1,7 +1,9 @@
 from rest_framework import serializers
 
 
-from domain.models import CompetitionRound, Competitor, Competition, HighlightCompetitionRound
+from domain.models import (
+    CompetitionRound, Competitor, Competition, HighlightCompetitionRound
+)
 
 
 class RankCompetitionRoundSerializer(serializers.ModelSerializer):

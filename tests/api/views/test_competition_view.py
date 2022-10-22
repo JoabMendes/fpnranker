@@ -229,21 +229,6 @@ class TestCompetitionRankAPIView:
 @pytest.mark.django_db
 class TestHighlightCompetitionRoundAPIView:
 
-    def test_should_get_empty_when_there_is_no_highlight(
-        self, api_client
-    ):
-        # given
-        endpoint = reverse(
-            "round-highlight",
-        )
-
-        # when
-        response = api_client.get(endpoint)
-
-        # then
-        assert response.status_code == status.HTTP_200_OK
-        assert response.json() == {'h_round_id': None, 'lifted_weight': None}
-
     def test_should_get_round_when_there_is_a_highlight(
         self, api_client
     ):

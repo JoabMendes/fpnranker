@@ -82,6 +82,8 @@ class HighlightCompetitionRoundAPIView(APIView):
     permission_classes = ()
 
     def get(self, request, format=None):
-        highlighted_round = HighlightCompetitionRound.objects.first()
+        highlighted_round = HighlightCompetitionRound.objects.latest(
+            "created_at"
+        )
         serialized = HighlightCompetitionRoundSerializer(highlighted_round)
         return Response(serialized.data)
